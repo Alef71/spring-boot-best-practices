@@ -1,6 +1,7 @@
+``
 <div align="center">
   
-  <img src="https://capsule-render.vercel.app/api?type=waving&color=timeGradient&height=250&section=header&text=Spring%20Boot%20&%20System%20Design&fontSize=50&fontAlignY=38&desc=O%20Manual%20Definitivo&descAlignY=60&descAlign=50" alt="Banner" />
+  <img src="https://capsule-render.vercel.app/api?type=waving&color=timeGradient&height=250&section=header&text=Spring%20Boot%20&%20System%20Design&fontSize=50&fontAlignY=50" alt="Banner" />
 
   <h1>🚀 Meu Framework de Desenvolvimento Backend</h1>
   <p><i>Um guia prático e opinativo de como eu desenvolvo APIs escaláveis, limpas e prontas para produção no Spring Boot.</i></p>
@@ -22,26 +23,29 @@ Este repositório não é apenas código. É o meu **framework pessoal de desenv
 - Princípios sólidos de engenharia de software.
 - Padrões usados em sistemas reais.
 
-O objetivo aqui é mostrar **como eu penso, estruturo e desenvolvo software backend **.
+O objetivo aqui é mostrar **como eu penso, estruturo e desenvolvo software backend**.
 
 ---
 
 ## 📑 Índice Interativo
 
-
-- [1. Filosofia de Desenvolvimento 🧠](#1-filosofia-de-desenvolvimento-)
-- [2. Estrutura do Projeto 📂](#2-estrutura-do-projeto-)
-- [3. Setup Inicial 🛠️](#3-setup-inicial-️)
-- [4. A Mão na Massa (Fluxo Completo) 💻](#4-a-mão-na-massa-fluxo-completo-)
-- [5. Tratamento de Erros e Boas Práticas 🛡️](#5-tratamento-de-erros-e-boas-práticas-️)
-- [6. Segurança (Spring Security & JWT) 🔒](#6-segurança-spring-security--jwt-)
-- [7. Escalabilidade e System Design 🚀](#7-escalabilidade-e-system-design-)
+- [1. Filosofia de Desenvolvimento 🧠](#-1-filosofia-de-desenvolvimento)
+- [2. Estrutura do Projeto 📂](#-2-estrutura-do-projeto)
+- [3. Setup Inicial 🛠️](#-3-setup-inicial-️)
+- [4. A Mão na Massa (Fluxo Completo) 💻](#-4-a-mão-na-massa-fluxo-completo)
+- [5. Tratamento de Erros e Boas Práticas 🛡️](#-5-tratamento-de-erros-e-boas-práticas-️)
+- [6. Segurança (Spring Security & JWT) 🔒](#-6-segurança-spring-security--jwt)
+- [7. Escalabilidade e System Design 🚀](#-7-escalabilidade-e-system-design)
+- [8. Testes e Qualidade (Garantia de Entrega) 🧪](#-8-testes-e-qualidade-garantia-de-entrega)
+- [9. Documentação Interativa (Swagger / OpenAPI) 📚](#-9-documentação-interativa-swagger--openapi)
+- [10. Ambiente e Deploy (Docker) 🐳](#-10-ambiente-e-deploy-docker)
+- [11. Observabilidade e Monitoramento 📊](#-11-observabilidade-e-monitoramento)
 
 ---
 
 ## 🧠 1. Filosofia de Desenvolvimento
 
-Antes de escrever a primeira linha de código, eu sigo regras claras. O objetivo é criar uma forma que refléte oque fazer. Tornando-o claro e eficiente.
+Antes de escrever a primeira linha de código, eu sigo regras claras. O objetivo é criar uma forma que reflita o que deve ser feito. Tornando-o claro e eficiente.
 
 ### 📐 Princípios Base
 * **SOLID:** Foco em classes com responsabilidades únicas e baixo acoplamento.
@@ -262,11 +266,94 @@ Quando escalar de **Monolito** para **Microsserviços**, as estratégias são:
 
 -----
 
+## 🧪 8. Testes e Qualidade (Garantia de Entrega)
 
+O Código não pode ir para produção sem garantia de que funciona. O desenvolvimento é guiado por testes para evitar regressões e garantir a integridade das regras de negócio.
+
+  * **JUnit 5 & Mockito:** Para testes unitários isolados da camada de `Service`.
+  * **Testcontainers:** Para testes de integração reais subindo um banco PostgreSQL efêmero via Docker.
+
+<!-- end list -->
+
+```java
+@ExtendWith(MockitoExtension.class)
+class UsuarioServiceTest {
+
+    @Mock
+    private UsuarioRepository repository;
+
+    @InjectMocks
+    private UsuarioService service;
+
+    @Test
+    @DisplayName("Deve lançar exceção ao tentar criar usuário com email já existente")
+    void deveLancarExcecaoQuandoEmailJaExiste() {
+        // Arrange
+        UsuarioCriarDTO dto = new UsuarioCriarDTO("João", "joao@email.com");
+        when(repository.existsByEmail(dto.getEmail())).thenReturn(true);
+
+        // Act & Assert
+        assertThrows(RuntimeException.class, () -> service.criar(dto));
+        verify(repository, never()).save(any(Usuario.class));
+    }
+}
+```
+
+-----
+
+## 📚 9. Documentação Interativa (Swagger / OpenAPI)
+
+Uma API só é útil se quem for consumir souber como usá-la. Ninguém precisa ler o código-fonte para entender os endpoints.
+
+Utilizamos o **SpringDoc OpenAPI** para gerar a documentação viva da API.
+
+  * **Acesso local:** `http://localhost:8080/swagger-ui.html`
+  * Os endpoints são descritos com exemplos de Request, Response e mapeamento de todos os Status HTTP possíveis.
+
+-----
+
+## 🐳 10. Ambiente e Deploy (Docker)
+
+O projeto é construído para rodar em qualquer lugar, sem a desculpa do *"na minha máquina funciona"*.
+
+Com apenas um comando, toda a infraestrutura (Banco de Dados, Filas, Cache e a própria Aplicação) sobe padronizada usando o `docker-compose`.
+
+```yaml
+version: '3.8'
+services:
+  postgres:
+    image: postgres:15-alpine
+    environment:
+      POSTGRES_USER: root
+      POSTGRES_PASSWORD: 123
+      POSTGRES_DB: meubanco
+    ports:
+      - "5432:5432"
+
+  api:
+    build: .
+    ports:
+      - "8080:8080"
+    depends_on:
+      - postgres
+    environment:
+      SPRING_DATASOURCE_URL: jdbc:postgresql://postgres:5432/meubanco
+```
+
+**Para rodar:** `docker-compose up -d`
+
+-----
+
+## 📊 11. Observabilidade e Monitoramento
+
+Sistemas falham, e quando isso acontece, precisamos de rastreabilidade.
+
+  * **Logs Estruturados (SLF4J/Logback):** Padronização de logs de erro e info.
+  * **Spring Boot Actuator:** Exposição do endpoint `/actuator/health` para que ferramentas de infraestrutura (como Kubernetes) saibam se a aplicação está saudável e pronta para receber tráfego.
 
 <br>
 
-> ⚡ *O desenvolvimento de software é uma jornada repleta de desafios e conquistas. Manter a motivação alta faz toda a diferença para um programador alcançar o sucesso."*
+> ⚡ *"O desenvolvimento de software é uma jornada repleta de desafios e conquistas. Manter a motivação alta faz toda a diferença para um programador alcançar o sucesso."*
 
 <div align="center">
   <b>Desenvolvido com foco em Software Engineer por <a href="[https://github.com/Alef71](https://github.com/Alef71)">Álef Francisco Ribeiro Amaral</a></b>
