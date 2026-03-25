@@ -272,7 +272,5 @@ Desenvolvido com foco em engenharia por \<a href="https://www.google.com/search?
 
 
 ```
-
-
 Gostaria que eu montasse um tutorial rápido de como você pode gravar um GIF da sua API rodando no Postman e adicionar ali no começo do README para deixar com ainda mais cara de "nível sênior"?
 ```
