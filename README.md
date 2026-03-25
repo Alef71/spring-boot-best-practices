@@ -268,9 +268,6 @@ Quando escalar de **Monolito** para **Microsserviços**, as estratégias são:
 
 > ⚡ *"Código limpo não é um luxo. É o mínimo."*
 
-Desenvolvido com foco em engenharia por \<a href="https://www.google.com/search?q=https://github.com/Alef71"\>Álef Francisco Ribeiro Amaral
-
-
-```
-Gostaria que eu montasse um tutorial rápido de como você pode gravar um GIF da sua API rodando no Postman e adicionar ali no começo do README para deixar com ainda mais cara de "nível sênior"?
-```
+<div align="center">
+  <b>Desenvolvido com foco em engenharia de software por <a href="[https://github.com/Alef71](https://github.com/Alef71)">Álef Francisco Ribeiro Amaral</a></b>
+</div>
