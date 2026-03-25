@@ -17,12 +17,12 @@
 ## 📌 Sobre o Projeto
 
 Este repositório não é apenas código. É o meu **framework pessoal de desenvolvimento backend**, onde aplico:
-- Boas práticas de mercado.
+- Boas práticas de programação.
 - Arquitetura limpa.
 - Princípios sólidos de engenharia de software.
 - Padrões usados em sistemas reais.
 
-O objetivo aqui é mostrar **como eu penso, estruturo e desenvolvo software backend profissional**.
+O objetivo aqui é mostrar **como eu penso, estruturo e desenvolvo software backend **.
 
 ---
 
@@ -41,7 +41,7 @@ O objetivo aqui é mostrar **como eu penso, estruturo e desenvolvo software back
 
 ## 🧠 1. Filosofia de Desenvolvimento
 
-Antes de escrever a primeira linha de código, eu sigo regras claras. O objetivo é criar um código que seja **lido por humanos primeiro, e por máquinas depois**.
+Antes de escrever a primeira linha de código, eu sigo regras claras. O objetivo é criar uma forma que refléte oque fazer. Tornando-o claro e eficiente.
 
 ### 📐 Princípios Base
 * **SOLID:** Foco em classes com responsabilidades únicas e baixo acoplamento.
@@ -266,8 +266,8 @@ Quando escalar de **Monolito** para **Microsserviços**, as estratégias são:
 
 <br>
 
-> ⚡ *"Código limpo não é um luxo. É o mínimo."*
+> ⚡ *O desenvolvimento de software é uma jornada repleta de desafios e conquistas. Manter a motivação alta faz toda a diferença para um programador alcançar o sucesso."*
 
 <div align="center">
-  <b>Desenvolvido com foco em engenharia de software por <a href="[https://github.com/Alef71](https://github.com/Alef71)">Álef Francisco Ribeiro Amaral</a></b>
+  <b>Desenvolvido com foco em Software Engineer por <a href="[https://github.com/Alef71](https://github.com/Alef71)">Álef Francisco Ribeiro Amaral</a></b>
 </div>
